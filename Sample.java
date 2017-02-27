@@ -80,12 +80,12 @@ public class Sample implements PageProcessor {
 		} else {
 			//p.addTargetRequest(next.get(0));
 			p.addTargetRequests(next);
-			if(Pattern.compile("(index)(_\\d)?").matcher(lastWord).matches()){
-				String[] arr = lastWord.split("_");
-				if(arr.length == 1){
-					url = url.replace(lastWord, arr[0]+"_2");
+			if(Pattern.compile("(/index)(_\\d)?.htm").matcher(lastWord).matches()){
+				String[] arr = lastWord.split("[._]");
+				if(arr.length == 2){
+					url = url.replace(lastWord, arr[0]+"_2"+'.'+arr[1]);
 				}else{
-					url = url.replace(lastWord, arr[0]+ Integer.parseInt(arr[1])+1);
+					url = url.replace(lastWord, arr[0]+'_'+(Integer.parseInt(arr[1])+1)+'.'+arr[2]);
 				}
 				p.addTargetRequest(url);
 			}
