@@ -28,7 +28,8 @@ public class Sample implements PageProcessor {
 	//user agent
 	final String UA_EDGE = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; Tablet PC 2.0; rv:11.0) like Gecko";
 	//
-	private Site site = Site.me().setRetryTimes(3).setSleepTime(1000).setTimeOut(10000).setHttpProxy(proxy).setUserAgent(UA_EDGE);
+	//private Site site = Site.me().setRetryTimes(3).setSleepTime(1000).setTimeOut(10000).setHttpProxy(proxy).setUserAgent(UA_EDGE);
+	private Site site = Site.me().setRetryTimes(3).setSleepTime(1000).setTimeOut(10000).setUserAgent(UA_EDGE);
 
 	public Site getSite() {
 		return site;
@@ -69,7 +70,7 @@ public class Sample implements PageProcessor {
 		if(next==null || next.size()==0){
 			printOrLog("文章标题： {}", h.xpath("//title/text()")); /* title */
 
-			List<String> a = h.xpath("//div[@id='area-player']/p/text()").all();
+			List<String> a = h.xpath("//div[@id='area-player']//p/text()|//div[@id='area-player']//span/text()").all();
 			printOrLog("文章内容： "); /* content */
 			for(String aa : a)
 				printOrLog(aa.trim());
