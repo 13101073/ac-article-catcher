@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "log4j" "log4j.dtd" >
+<log4j:configuration>
+
+	<!-- class trace log in console -->
+	<appender name="class_trace_console" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="conversionPattern" value="[molaga-webmagic][class trace][%5p] [%-d{yyyy-MM-dd HH:mm:ss}] %c&lt;%M(line:%L)&gt;%n"/>
+		</layout>
+	</appender>
+	<!-- message trace log in console -->
+	<appender name="msg_trace_console" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="conversionPattern" value="[molaga-webmagic][ msg  trace][%5p] [%-d{yyyy-MM-dd HH:mm:ss}] %m%n"/>
+		</layout>
+	</appender>
+	<!-- message trace log in file -->
+	<appender name="msg_trace_file" class="org.apache.log4j.RollingFileAppender">
+		<param name="maxFileSize" value="32MB"/>
+		<param name="file" value="./log4j.log"/>
+		<param name="maxBackupIndex" value="3"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="conversionPattern" value="[%-d{yyyy-MM-dd HH:mm:ss}] %m%n"/>
+		</layout>
+	</appender>
+
+	<logger name="org.apache.http">
+	   <level value="error"/>
+	   <appender-ref ref="msg_trace_console"/>
+	</logger>
+
+	<logger name="us.codecraft.webmagic">
+       <level value="error"/>
+       <appender-ref ref="msg_trace_console"/>
+    </logger>
+
+	<root>
+		<level class="org.apache.log4j.Level" value="debug"/>
+<!-- 		<appender-ref ref="class_trace_console"/> -->
+		<appender-ref ref="msg_trace_console"/>
+		<appender-ref ref="msg_trace_file"/>
+	</root>
+</log4j:configuration>
